@@ -17,18 +17,19 @@ public class Homework01 {
         ResultSet rs = null;
 
         // 1. 注册驱动，获取连接 使用DButils工具
+
         try {
             conn = DButils.getConnection();
             // 3 获取数据库操作对象
             String sql =
                     "select " +
-                        "e.ename, e.deptno, t.maxsal " +
-                    "from " +
-                        "emp e " +
-                    "join" +
-                        " (select deptno, max(sal) maxsal from emp  group by deptno) t " +
-                    "on " +
-                        "e.deptno = t.deptno and e.sal = t.maxsal";
+                            "e.ename, e.deptno, t.maxsal " +
+                            "from " +
+                            "emp e " +
+                            "join" +
+                            " (select deptno, max(sal) maxsal from emp  group by deptno) t " +
+                            "on " +
+                            "e.deptno = t.deptno and e.sal = t.maxsal";
 
             ps = conn.createStatement();
             rs = ps.executeQuery(sql);

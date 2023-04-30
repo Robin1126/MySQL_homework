@@ -2,25 +2,39 @@ package DButils;
 
 import java.sql.*;
 import java.util.ResourceBundle;
-
+/**/
 public class DButils {
+    private static ResourceBundle resourceBundle = ResourceBundle.getBundle("resources.Info");
+    private static String className = resourceBundle.getString("className");
 
-    // 加载驱动
+    private static String url = resourceBundle.getString("url");
+    private static String userName = resourceBundle.getString("userName");
+    private static String password = resourceBundle.getString("password");
+
     static {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName(className);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
+
+    // 加载驱动
+    /*
+    static {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }*/
 
     private DButils() {
     }
 
     // 获取连接对象
     public static Connection getConnection() throws SQLException {
-        ResourceBundle rb = ResourceBundle.getBundle("Info");
-        return DriverManager.getConnection(rb.getString("url"),rb.getString("userName"),rb.getString("password"));
+        return DriverManager.getConnection(url, userName, password);
     }
 
     // 释放资源
